@@ -1,6 +1,6 @@
-package com.CarServiceProject.CarService.Repository;
+package org.example.carcare.booking.Repository;
 
-import com.CarServiceProject.CarService.model.ServicesSchedule;
+import org.example.carcare.booking.model.ServicesSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
