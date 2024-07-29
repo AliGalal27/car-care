@@ -1,8 +1,8 @@
-package com.CarServiceProject.CarService.controller;
+package org.example.carcare.booking.controller;
 
-import com.CarServiceProject.CarService.model.Booking;
-import com.CarServiceProject.CarService.model.ServicesSchedule;
-import com.CarServiceProject.CarService.services.BookingService;
+import org.example.carcare.booking.model.Booking;
+import org.example.carcare.booking.model.ServicesSchedule;
+import org.example.carcare.booking.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
