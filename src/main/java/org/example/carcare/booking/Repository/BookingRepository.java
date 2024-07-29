@@ -1,4 +1,4 @@
-package package org.example.carcare.booking.Repository;
+package org.example.carcare.booking.Repository;
 
 import org.example.carcare.booking.model.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
