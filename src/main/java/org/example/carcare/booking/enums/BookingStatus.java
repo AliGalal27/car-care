@@ -1,4 +1,4 @@
-package com.CarServiceProject.CarService.enums;
+package org.example.carcare.booking.enums;
 
 public enum BookingStatus {
     CONFIRMED,
