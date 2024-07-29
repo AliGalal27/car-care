@@ -1,11 +1,10 @@
-package com.CarServiceProject.CarService.services;
-
-import com.CarServiceProject.CarService.Repository.BookingRepository;
-import com.CarServiceProject.CarService.Repository.ServicesScheduleRepository;
-import com.CarServiceProject.CarService.enums.BookingStatus;
-import com.CarServiceProject.CarService.enums.ServicesScheduleStatus;
-import com.CarServiceProject.CarService.model.Booking;
-import com.CarServiceProject.CarService.model.ServicesSchedule;
+package org.example.carcare.booking.services;
+import org.example.carcare.booking.Repository.BookingRepository;
+import org.example.carcare.booking.Repository.ServicesScheduleRepository;
+import org.example.carcare.booking.enums.BookingStatus;
+import org.example.carcare.booking.enums.ServicesScheduleStatus;
+import org.example.carcare.booking.model.Booking;
+import org.example.carcare.booking.model.ServicesSchedule;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
