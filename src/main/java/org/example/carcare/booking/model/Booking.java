@@ -1,6 +1,6 @@
-package com.CarServiceProject.CarService.model;
+package org.example.carcare.booking.model;
 
-import com.CarServiceProject.CarService.enums.BookingStatus;
+import org.example.carcare.booking.enums.BookingStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
