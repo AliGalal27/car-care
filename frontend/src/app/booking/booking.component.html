@@ -1,0 +1,22 @@
+<div class="booking-container">
+    <h2>Book {{ selectedService }}</h2>
+
+    <div class="form-group">
+        <label for="date">Preferred Date:</label>
+        <input type="date" id="date" #dateInput [min]="minDate" required>
+    </div>
+
+    <div class="form-group">
+        <label for="time">Preferred Time:</label>
+        <input type="time" id="time" #timeInput [min]="minTime" required>
+    </div>
+
+    <button (click)="onSubmit(dateInput.value, timeInput.value)">
+        Confirm Booking
+    </button>
+
+    <!-- Message display area -->
+    <p [hidden]="!confirmationMessage" class="confirmation-message">
+        {{ confirmationMessage }}
+    </p>
+</div>
