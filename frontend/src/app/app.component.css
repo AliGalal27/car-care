@@ -1,0 +1,111 @@
+/* Basic container styling */
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Button container styling */
+.button-container {
+    margin-top: 20px;
+}
+
+/* Button styling */
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa; /* Adjust to your preferred color */
+    position: relative;
+}
+
+/* Sidebar toggle button styling */
+.sidebar-toggle {
+    background-color: #343a40; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 20px;
+    position: absolute;
+    left: 15px; /* Position the button within the header */
+    top: 15px; /* Position the button within the header */
+    z-index: 1000; /* Ensure button is above other content */
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 250px; /* Adjust width as needed */
+    background-color: #343a40; /* Sidebar background color */
+    color: #ffffff; /* Text color */
+    height: 100vh; /* Full height */
+    padding: 20px;
+    position: fixed; /* Fixed position on the left */
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease; /* Smooth transition */
+    transform: translateX(0); /* Initially open */
+}
+
+/* Sidebar closed styling */
+.sidebar-closed {
+    transform: translateX(-100%); /* Hide sidebar off-screen */
+}
+
+/* Logo container styling */
+.logo-container {
+    margin-left: 250px; /* Offset by the sidebar width */
+    padding: 20px; /* Padding for logo */
+    flex-grow: 1;
+    transition: margin-left 0.3s ease; /* Smooth transition */
+}
+
+/* Adjust logo container margin when sidebar is open or closed */
+.sidebar-open ~ .logo-container {
+    margin-left: 250px; /* Adjust offset when sidebar is open */
+}
+
+.sidebar-closed ~ .logo-container {
+    margin-left: 0; /* Adjust offset when sidebar is closed */
+}
+
+/* Logo styling */
+.logo {
+    height: 50px; /* Adjust the height as needed */
+    width: auto; /* Maintain aspect ratio */
+}
+
+/* Optional: Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px; /* Adjust for smaller screens */
+    }
+
+    .logo-container {
+        margin-left: 200px; /* Offset by the new sidebar width */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 150px; /* Further adjust for very small screens */
+    }
+
+    .logo-container {
+        margin-left: 150px; /* Offset by the new sidebar width */
+    }
+}
