@@ -1,0 +1,23 @@
+/* Contact info styling */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  
+  .contact-item {
+    margin: 10px 0;
+  }
+  
+  .contact-item h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .contact-item p {
+    font-size: 16px;
+    color: #666;
+  }
+  
