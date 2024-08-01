@@ -1,4 +1,5 @@
-package com.example.demo;
+package org.example.carcare.Login;
+
 
 public class LoginRequest {
 	private String email;

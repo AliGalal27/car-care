@@ -1,6 +1,5 @@
-package com.example.demo;
+package org.example.carcare.user;
 
-import com.example.demo.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.EntityManager;

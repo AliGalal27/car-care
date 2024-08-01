@@ -1,4 +1,4 @@
-package com.example.demo;
+package org.example.carcare.reviews;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

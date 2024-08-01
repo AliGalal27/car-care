@@ -1,7 +1,7 @@
-package com.example.demo;
+package org.example.carcare.user;
 
-import com.example.*;
 
+import org.example.carcare.Login.LoginRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
