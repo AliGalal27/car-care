@@ -28,12 +28,12 @@ public class Booking {
  @Column(name="service_schedule_id", nullable = false)
  private int serviceScheduleId;
 
- @Column(name="booking_date", updatable = false)
+ @Column(name="booking_date")
  @Temporal(TemporalType.TIMESTAMP)
  private Date bookingDate;
 
  @Enumerated(EnumType.STRING)
- @Column(name="status", updatable = false)
+ @Column(name="status")
  private BookingStatus bookingStatus;
 
  @PrePersist
