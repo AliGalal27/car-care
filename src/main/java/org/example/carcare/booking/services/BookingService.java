@@ -63,11 +63,17 @@ public class BookingService {
         if (newSchedule.getServicesScheduleStatus().equals(ServicesScheduleStatus.BOOKED))
             throw new IllegalArgumentException("The chosen slot is already booked. Please choose a different service schedule.");
 
-            existingBooking.setServiceScheduleId(newScheduleId);
-            existingBooking.setBookingDate(new Date());
+        ServicesSchedule oldSchedule= servicesScheduleRepository.findById(existingBooking.getServiceScheduleId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Service Schedule ID."));
+        oldSchedule.setServicesScheduleStatus(ServicesScheduleStatus.AVAILABLE);
+        existingBooking.setBookingStatus(BookingStatus.PENDING);
+
+        
+        existingBooking.setServiceScheduleId(newScheduleId);
+        existingBooking.setBookingDate(new Date());
 
 
-            return bookingRepository.save(existingBooking);
+        return bookingRepository.save(existingBooking);
         }
 
         @Transactional
