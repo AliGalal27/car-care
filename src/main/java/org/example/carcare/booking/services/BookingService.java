@@ -63,11 +63,17 @@ public class BookingService {
         if (newSchedule.getServicesScheduleStatus().equals(ServicesScheduleStatus.BOOKED))
             throw new IllegalArgumentException("The chosen slot is already booked. Please choose a different service schedule.");
 
-            existingBooking.setServiceScheduleId(newScheduleId);
-            existingBooking.setBookingDate(new Date());
+        ServicesSchedule oldSchedule= servicesScheduleRepository.findById(existingBooking.getServiceScheduleId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Service Schedule ID."));
+        oldSchedule.setServicesScheduleStatus(ServicesScheduleStatus.AVAILABLE);
+        existingBooking.setBookingStatus(BookingStatus.PENDING);
+
+        
+        existingBooking.setServiceScheduleId(newScheduleId);
+        existingBooking.setBookingDate(new Date());
 
 
-            return bookingRepository.save(existingBooking);
+        return bookingRepository.save(existingBooking);
         }
 
         @Transactional
@@ -82,4 +88,33 @@ public class BookingService {
             return bookingRepository.findByUserId(userId);
         }
 
+        //for admins
+        @Transactional
+        public Booking confirmBooking(int bookingId) {
+            Booking booking = bookingRepository.findById(bookingId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Booking ID: " + bookingId));
+
+            if(booking.getBookingStatus().equals(BookingStatus.CONFIRMED))
+                throw new IllegalArgumentException("This booking is already confirmed.");
+
+            ServicesSchedule servicesSchedule = servicesScheduleRepository.findById(booking.getServiceScheduleId())
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Booking ID: " + bookingId));
+
+            if(servicesSchedule.getServicesScheduleStatus().equals(ServicesScheduleStatus.BOOKED))
+                throw new IllegalArgumentException("This service schedule is already booked");
+
+            booking.setBookingStatus(BookingStatus.CONFIRMED);
+            bookingRepository.save(booking);
+
+            servicesSchedule.setServicesScheduleStatus(ServicesScheduleStatus.BOOKED);
+            servicesScheduleRepository.save(servicesSchedule);
+
+            return booking;
+        }
+
+        public List<Booking> getAllBookings( ){
+            return bookingRepository.findAll();
+        }
+
+    
     }

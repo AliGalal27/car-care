@@ -1,7 +1,6 @@
 package org.example.carcare.booking.controller;
 
 import org.example.carcare.booking.model.Booking;
-import org.example.carcare.booking.model.ServicesSchedule;
 import org.example.carcare.booking.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,5 +40,18 @@ public class BookingController {
     public List<Booking> getBookingHistory(@RequestParam int userId) {
         return bookingService.getBookingHistoryForUser(userId);
     }
+
+    // for admins
+    @PutMapping("/{bookingId}/confirm")
+    public Booking confirmBooking(@PathVariable int bookingId) {
+        return bookingService.confirmBooking(bookingId);
+    }
+
+    @GetMapping
+    public List<Booking> getAllBookings() {
+
+        return bookingService.getAllBookings();
+    }
+    
 
 }
