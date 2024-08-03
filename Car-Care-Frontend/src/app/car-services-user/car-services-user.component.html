@@ -1,0 +1,33 @@
+<app-header></app-header>
+
+<div class="container">
+    <div class="filter">
+      <label for="serviceType">Filter by Service Type:</label>
+      <select id="serviceType" (change)="onServiceTypeChange($event)">
+        <option value="">All</option>
+        <option value="Maintenance">Maintenance</option>
+        <option value="Designing">Designing</option>
+        <option value="Testing">Testing</option>
+        <option value="Racing">Racing</option>
+        <!-- Add more options as needed -->
+      </select>
+    </div>
+
+    @if (carServices.length) {
+        @for (carService of carServices; track $index) {
+            <div class="card">
+                <h3>{{ carService.service_name }}</h3>
+                <img [src]="carService.image_url" alt="{{ carService.service_name }}" class="card-img" />
+                <p>{{ carService.description }}</p>
+                <p><strong>Type:</strong> {{ carService.serviceType }}</p>
+                <p><strong>Price:</strong> {{ carService.price }} EGP</p>
+                <button (click)="bookService(carService.service_id)" class="btn btn-primary">Book Now</button>
+            </div>
+
+        }
+    }
+    @else {
+        <p>No car services available.</p>
+    }
+
+</div>

@@ -23,7 +23,7 @@ public class ServicesService {
     }
 
     public void addNewService(Services service) {
-        Optional<Services> serviceOptional = servicesRepository.findByServiceid(service.getService_id());
+        Optional<Services> serviceOptional = servicesRepository.findByServiceid(service.getServiceid());
         if (serviceOptional.isPresent()) {
             throw new IllegalStateException("Service already exists");
         }
@@ -43,13 +43,15 @@ public class ServicesService {
     }
     @Transactional
     public Services updateService(
-            int serviceId, String serviceName, String description, String serviceType, int price) {
+            int serviceId, String serviceName, String description, String serviceType, int price,String imageUrl) {
         Optional<Services> optionalService = servicesRepository.findById(serviceId);
         if (optionalService.isPresent()) {
             Services existingService = optionalService.get();
             if (serviceName != null) existingService.setService_name(serviceName);
             if (description != null) existingService.setDescription(description);
             if (serviceType != null) existingService.setServiceType(serviceType);
+            if (imageUrl != null) existingService.setImage_url(imageUrl); // Update image URL
+
             existingService.setPrice(price);
             return servicesRepository.save(existingService);
         } else {
@@ -59,6 +61,14 @@ public class ServicesService {
 
     public List<Services> getServicesByType(String serviceType) {
         return servicesRepository.findByServiceType(serviceType);
+    }
+    public Services getServiceById(int id) {
+        Optional<Services> serviceOptional = servicesRepository.findById(id);
+        if (serviceOptional.isPresent()) {
+            return serviceOptional.get();
+        } else {
+            throw new RuntimeException("Service with id: " + id + "could not found");
+        }
     }
 }
 

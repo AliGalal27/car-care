@@ -16,6 +16,7 @@ public class UserService {
 	@Transactional
 	public User register(User user) {
 		manager.persist(user);
+		System.out.println("user added successfully");
 		return user;
 	}
 	

@@ -1,9 +1,13 @@
 package org.example.carcare.services;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table
+@Data
 public class Services {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,6 +18,8 @@ public class Services {
     @Column(name = "service_type")
     private String serviceType;
     private int price;
+    @Column(name = "image_url")
+    private String image_url;
 
     public Services() {}
 
@@ -31,48 +37,6 @@ public class Services {
         this.serviceType = serviceType;
         this.price = price;
     }
-    //region getters and setters
-    public int getService_id() {
-        return serviceid;
-    }
-
-    public void setService_id(int serviceid) {
-        this.serviceid = serviceid;
-    }
-
-    public String getService_name() {
-        return service_name;
-    }
-
-    public void setService_name(String service_name) {
-        this.service_name = service_name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(String serviceType) {
-        this.serviceType = serviceType;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-    //endregion
-
 
     @Override
     public String toString() {

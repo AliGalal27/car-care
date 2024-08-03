@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `carservice` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `carservice`;
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: localhost    Database: carservice
@@ -30,6 +28,7 @@ CREATE TABLE `services` (
   `service_name` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `price` int NOT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`service_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,7 +39,7 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
-INSERT INTO `services` VALUES (2,'Maintenance','new tires','Replacing new tires',4000),(3,'Designing','Wrapping','get a new car color',5000),(4,'testing','motor test','testing motor performance',1000),(5,'racing','track test','1 hour of track time',15000),(6,'Maintenance','Washing','full car wash',180);
+INSERT INTO `services` VALUES (2,'Maintenance','new tires','Replacing new tires',4000,'assets/GettyImages-186471025.jpeg'),(3,'Designing','Wrapping','get a new car color',5000,NULL),(4,'testing','motor test','testing motor performance',1000,NULL),(5,'racing','track test','1 hour of track time',15000,'assets/home-race-licence_1684249268.jpg'),(6,'Maintenance','Washing','full car wash',180,NULL);
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-28 13:02:38
+-- Dump completed on 2024-08-03 18:21:58

@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users") // http://localhost:8090/users
+@RequestMapping("/users") // http://localhost:8080/users
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/register") // http://localhost:8090/users/register
+	@PostMapping("/signup") // http://localhost:8080/users/signup
 	public User register(@RequestBody User user) {
 		return userService.register(user);
 	}
 	
-	@PostMapping("/login") // http://localhost:8090/users/login
+	@PostMapping("/login") // http://localhost:8080/users/login
 	public String login(@RequestBody LoginRequest request) {
 		return userService.login(request.getEmail(), request.getPassword());
 	}
