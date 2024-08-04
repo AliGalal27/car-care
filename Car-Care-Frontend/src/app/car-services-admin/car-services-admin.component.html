@@ -1,0 +1,53 @@
+<app-header></app-header>
+<div class="form-container">
+    <form (ngSubmit)="addService()">
+      <input type="text" [(ngModel)]="newService.name" name="name" placeholder="Service Name" required />
+      <input type="text" [(ngModel)]="newService.description" name="description" placeholder="Service Description" required />
+      <input type="text" [(ngModel)]="newService.serviceType" name="Type" placeholder="Service Type" required />
+      <input type="number" [(ngModel)]="newService.price" name="price" placeholder="Service price" required />
+      <input type="file" [(ngModel)]="newService.image_url" name="image_url" placeholder="Image URL" required />
+      <button type="submit" class="button-primary">Add Service</button>
+    </form>
+  </div>
+<div class="container">
+    <div class="filter">
+      <label for="serviceType">Filter by Service Type:</label>
+      <select id="serviceType" (change)="onServiceTypeChange($event)">
+        <option value="">All</option>
+        @for (serviceType of serviceTypes; track $index) {
+            <option [value]="serviceType">{{serviceType}}</option>"
+        }
+        <!-- Add more options as needed -->
+      </select>
+    </div>
+
+    @if (carServices.length) {
+        @for (carService of carServices; track $index) {
+            @if (!carService.editMode) {
+            <div class="card">
+                <h3>{{ carService.service_name }}</h3>
+                <img [src]="carService.image_url" alt="{{ carService.service_name }}" class="card-img" />
+                <p>{{ carService.description }}</p>
+                <p><strong>Type:</strong> {{ carService.serviceType }}</p>
+                <p><strong>Price:</strong> {{ carService.price }} EGP</p>
+                <button (click)="toggleEditing(carService)" class="button-primary">Edit Mode</button>
+            </div>
+            }@else {
+                <input [(ngModel)]="carService.service_name" type="text" class="form-control" placeholder="Service Name" />
+                <textarea [(ngModel)]="carService.description" class="form-control" placeholder="Description"></textarea>
+                <input [(ngModel)]="carService.serviceType" type="text" class="form-control" placeholder="Service Type" />
+                <input [(ngModel)]="carService.price" type="number" class="form-control" placeholder="Price" />
+                <img [src]="carService.image_url" alt="{{ carService.service_name }}" class="card-img" />
+                <input type="file" (change)="onFileSelected($event,carService)" accept="image/*">
+                <!-- <button class="button-primary" (change)="onUpload(carService)">Upload Image</button> -->
+                <button (click)="saveChanges(carService.serviceid,carService)" class="button-primary">Save</button>
+                <button class="button-danger" (click)="deleteService(carService.serviceid)">Delete</button>
+                <button (click)="toggleEditing(carService)" class="button-secondary">Cancel</button>
+            }
+        }
+    }
+    @else {
+        <p>No car services available.</p>
+    }
+
+</div>

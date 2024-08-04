@@ -42,22 +42,21 @@ public class ServicesService {
         }
     }
     @Transactional
-    public Services updateService(
-            int serviceId, String serviceName, String description, String serviceType, int price,String imageUrl) {
+    public Services updateService(int serviceId, Services updatedService) {
         Optional<Services> optionalService = servicesRepository.findById(serviceId);
         if (optionalService.isPresent()) {
             Services existingService = optionalService.get();
-            if (serviceName != null) existingService.setService_name(serviceName);
-            if (description != null) existingService.setDescription(description);
-            if (serviceType != null) existingService.setServiceType(serviceType);
-            if (imageUrl != null) existingService.setImage_url(imageUrl); // Update image URL
-
-            existingService.setPrice(price);
+            if (updatedService.getService_name() != null) existingService.setService_name(updatedService.getService_name());
+            if (updatedService.getDescription() != null) existingService.setDescription(updatedService.getDescription());
+            if (updatedService.getServiceType() != null) existingService.setServiceType(updatedService.getServiceType());
+            if (updatedService.getPrice() != 0) existingService.setPrice(updatedService.getPrice());
+            if (updatedService.getImage_url() != null) existingService.setImage_url(updatedService.getImage_url());
             return servicesRepository.save(existingService);
         } else {
             throw new RuntimeException("Service not found with id: " + serviceId);
         }
     }
+
 
     public List<Services> getServicesByType(String serviceType) {
         return servicesRepository.findByServiceType(serviceType);
@@ -69,6 +68,10 @@ public class ServicesService {
         } else {
             throw new RuntimeException("Service with id: " + id + "could not found");
         }
+    }
+
+    public List<String> getDistinctServiceTypes() {
+        return servicesRepository.findDistinctServiceTypes();
     }
 }
 

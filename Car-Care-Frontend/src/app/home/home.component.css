@@ -1,0 +1,156 @@
+/* Basic container styling */
+.container {
+    text-align: center;
+    margin-top: 90px;
+    position: fixed; /* Fix the container */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust the position to the center */
+    width: 100%; /* Adjust width if needed */
+    max-width: 600px; /* Max width for the container */
+    background: #ffffff; /* Background color for better readability */
+    padding: 20px; /* Padding for content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow for better appearance */
+    border-radius: 10px; /* Optional: rounded corners */
+}
+
+/* Slogan styling */
+.slogan {
+    font-size: 24px;
+    margin: 10px auto;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Description styling */
+.description {
+    font-size: 18px;
+    margin: 20px auto;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Image styling */
+.center-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    margin: 20px auto;
+}
+
+/* Button container styling */
+.button-container {
+    display: flex;
+    align-items: center; /* Center buttons vertically */
+    margin-top: 0; /* Remove additional margin */
+}
+
+/* Button styling */
+button {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e6e6e6;
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensure space between elements */
+    background-color: #e6e6e6; /* Adjust to your preferred color */
+    position: fixed;
+    width: 100%; /* Ensure the header spans the full width of the viewport */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure the header is above other content */
+    padding: 10px 20px; /* Add some padding */
+}
+
+/* Logo container styling */
+.logo-container {
+    display: flex;
+    align-items: center; /* Align logo and text vertically */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Logo styling */
+.logo {
+    height: 50px; /* Adjust the height as needed */
+    width: auto; /* Maintain aspect ratio */
+}
+
+/* Logo text styling */
+.logo-text {
+    margin-left: 10px; /* Space between logo and text */
+    font-size: 24px; /* Adjust font size as needed */
+    font-weight: bold; /* Optional: Make text bold */
+    color: #000000; /* Optional: Adjust text color */
+}
+
+/* Navigation buttons styling */
+.nav-buttons {
+    display: flex;
+    justify-content: center; /* Center the navigation buttons */
+    flex-grow: 1; /* Ensure it takes available space */
+    margin-left: auto;
+    margin-right: auto; /* Center the nav-buttons within the header */
+}
+
+.nav-buttons button {
+    margin: 0 10px; /* Adjust spacing between buttons */
+}
+
+/* Login and Signup buttons container */
+.button-container {
+    display: flex;
+    align-items: center; /* Center vertically */
+    margin-left: auto; /* Push to the right */
+    translate: -50px;
+}
+
+/* Optional: Responsive adjustments */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-buttons {
+        flex-direction: row; /* Keep nav-buttons in a row */
+        justify-content: center; /* Center the nav-buttons */
+        margin: 10px 0; /* Add some vertical spacing */
+    }
+
+    .button-container {
+        margin-top: 10px; /* Adjust margin for small screens */
+        translate: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-buttons {
+        flex-direction: row; /* Keep nav-buttons in a row */
+        justify-content: center; /* Center the nav-buttons */
+        margin: 10px 0; /* Add some vertical spacing */
+    }
+
+    .button-container {
+        margin-top: 10px; /* Adjust margin for small screens */
+        translate: 0;
+    }
+}

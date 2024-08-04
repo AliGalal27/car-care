@@ -11,8 +11,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.IOException;
 import java.nio.file.StandardCopyOption;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(path = "CarServices")
 public class ServicesController {
@@ -36,8 +39,10 @@ public class ServicesController {
     }
 
     @PostMapping
-    public void addService(@RequestBody Services service) {
+    public ResponseEntity<String> addService(@RequestBody Services service) {
         servicesService.addNewService(service);
+        return ResponseEntity.ok("Service added successfully");
+
     }
 
     @DeleteMapping(path = "{serviceId}")
@@ -46,16 +51,11 @@ public class ServicesController {
 
     }
 
-
-    @PutMapping("/{id}/{service_name}/{description}/{serviceType}/{price}/{imageUrl}")
+    @PutMapping("/{id}")
     public Services updateService(
             @PathVariable int id,
-            @PathVariable String service_name,
-            @PathVariable String description,
-            @PathVariable String serviceType,
-            @PathVariable int price,
-            @PathVariable String imageUrl) {
-        return servicesService.updateService(id, service_name, description, serviceType, price,imageUrl);
+            @RequestBody Services updatedService) {
+        return servicesService.updateService(id, updatedService);
     }
 
     @GetMapping("/type/{serviceType}")
@@ -64,7 +64,9 @@ public class ServicesController {
     }
 
     @PostMapping("/upload/{id}")
-    public ResponseEntity<String> uploadImage(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<Map<String, String>> uploadImage(@PathVariable("id") int id, @RequestParam("file") MultipartFile file) {
+        Map<String, String> response = new HashMap<>();
+
         try {
             // Check and create directory if not exists
             Path uploadDir = Paths.get(uploadPath);
@@ -75,7 +77,8 @@ public class ServicesController {
             // Handle file name safely
             String fileName = file.getOriginalFilename();
             if (fileName == null || fileName.isEmpty()) {
-                return ResponseEntity.badRequest().body("Invalid file name");
+                response.put("message", "Invalid file name");
+                return ResponseEntity.badRequest().body(response);
             }
             Path filePath = uploadDir.resolve(fileName);
 
@@ -88,15 +91,22 @@ public class ServicesController {
             Services service = servicesService.getServiceById(id); // Fetch service by ID
             if (service != null) {
                 service.setImage_url(relativePath); // Update with relative path
-                servicesService.updateService(service.getServiceid(), service.getService_name(), service.getDescription(), service.getServiceType(), service.getPrice(), relativePath);
-                return ResponseEntity.ok("Image uploaded and saved successfully");
+                servicesService.updateService(service.getServiceid(),service);
+                response.put("message", "Image uploaded and saved successfully");
+                return ResponseEntity.ok(response);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found");
-            }
+                response.put("message", "Service not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);            }
         } catch (IOException e) {
             e.printStackTrace(); // Print stack trace for debugging
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload image");
+            response.put("message", "Failed to upload image");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
+    }
+
+    @GetMapping("/types")
+    public List<String> getServiceTypes() {
+        return servicesService.getDistinctServiceTypes();
     }
 
 
