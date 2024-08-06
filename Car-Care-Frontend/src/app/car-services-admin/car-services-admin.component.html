@@ -1,15 +1,26 @@
 <app-header></app-header>
-<div class="form-container">
-    <form (ngSubmit)="addService()">
-      <input type="text" [(ngModel)]="newService.name" name="name" placeholder="Service Name" required />
-      <input type="text" [(ngModel)]="newService.description" name="description" placeholder="Service Description" required />
-      <input type="text" [(ngModel)]="newService.serviceType" name="Type" placeholder="Service Type" required />
-      <input type="number" [(ngModel)]="newService.price" name="price" placeholder="Service price" required />
-      <input type="file" [(ngModel)]="newService.image_url" name="image_url" placeholder="Image URL" required />
-      <button type="submit" class="button-primary">Add Service</button>
-    </form>
-  </div>
+
 <div class="container">
+    @if (isAddServiceFormVisible) {
+        <div class="form-container">
+            <form (ngSubmit)="addService($event)">
+              <input type="text" [(ngModel)]="newService.service_name" name="name" placeholder="Service Name" required />
+              <input type="text" [(ngModel)]="newService.description" name="description" placeholder="Service Description" required />
+              <input type="text" [(ngModel)]="newService.serviceType" name="Type" placeholder="Service Type" required />
+              <input type="number" [(ngModel)]="newService.price" name="price" placeholder="Service price" required />
+              <div class="button-group">
+                <button type="submit" class="button-primary">Add Service</button>
+                <button type="button" (click)="cancelAddService()" class="button-danger">Cancel</button>
+              </div>
+
+            </form>
+
+          </div>
+    
+    }@else {
+        <button (click)="toggleAddServiceForm()" class="button-primary add-button">Add Service</button>
+    }
+    
     <div class="filter">
       <label for="serviceType">Filter by Service Type:</label>
       <select id="serviceType" (change)="onServiceTypeChange($event)">
@@ -33,12 +44,12 @@
                 <button (click)="toggleEditing(carService)" class="button-primary">Edit Mode</button>
             </div>
             }@else {
-                <input [(ngModel)]="carService.service_name" type="text" class="form-control" placeholder="Service Name" />
+                <input [(ngModel)]="carService.service_name" type="text" class="form-control" placeholder="Service Name"/>
                 <textarea [(ngModel)]="carService.description" class="form-control" placeholder="Description"></textarea>
                 <input [(ngModel)]="carService.serviceType" type="text" class="form-control" placeholder="Service Type" />
                 <input [(ngModel)]="carService.price" type="number" class="form-control" placeholder="Price" />
                 <img [src]="carService.image_url" alt="{{ carService.service_name }}" class="card-img" />
-                <input type="file" (change)="onFileSelected($event,carService)" accept="image/*">
+                <input type="file" (change)="UploadImage($event,carService.serviceid)" accept="image/*">
                 <!-- <button class="button-primary" (change)="onUpload(carService)">Upload Image</button> -->
                 <button (click)="saveChanges(carService.serviceid,carService)" class="button-primary">Save</button>
                 <button class="button-danger" (click)="deleteService(carService.serviceid)">Delete</button>

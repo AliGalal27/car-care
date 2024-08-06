@@ -14,12 +14,23 @@ export class HeaderComponent {
     this.router.navigate(['/']);
   }
 
-  goToServices(): void {
-    this.router.navigate(['/services']);
+  goToServices() {
+    this.router.navigate(['/car-services-user']);
   }
-
+  goToServices_admin() {
+    this.router.navigate(['/car-services-admin']);
+  }
   goToContact(): void {
     this.router.navigate(['/contact']);
+  }
+  goToBokings(): void {
+    this.router.navigate(['/booking']);
+  }
+  goToAppointments(): void {
+    this.router.navigate(['/appointments']);
+  }
+  goToBookingsHistory(): void {
+    this.router.navigate(['/booking-history']);
   }
 
   goToReview(): void {

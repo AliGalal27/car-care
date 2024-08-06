@@ -1,0 +1,21 @@
+.booking-history-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .booking-history-container h2 {
+    margin-bottom: 20px;
+  }
+  
+  .booking-history-container ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .booking-history-container li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  

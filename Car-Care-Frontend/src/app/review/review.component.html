@@ -1,0 +1,57 @@
+<div class="review-container">
+    <h2>Leave a Review</h2>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="service">Service:</label>
+      <select id="service" required>
+        <option value="None">None</option>
+        <option value="Service 1">Service 1</option>
+        <option value="Service 2">Service 2</option>
+        <option value="Service 3">Service 3</option>
+        <!-- Add more services as needed -->
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="reviewText">Review:</label>
+      <textarea id="reviewText" required></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label>Rating:</label>
+      <div class="stars">
+        <i (click)="rate(1)"
+           [style.color]="rating >= 1 ? 'gold' : 'gray'"
+           style="font-size: 24px; cursor: pointer;">
+           ★
+        </i>
+        <i (click)="rate(2)"
+           [style.color]="rating >= 2 ? 'gold' : 'gray'"
+           style="font-size: 24px; cursor: pointer;">
+           ★
+        </i>
+        <i (click)="rate(3)"
+           [style.color]="rating >= 3 ? 'gold' : 'gray'"
+           style="font-size: 24px; cursor: pointer;">
+           ★
+        </i>
+        <i (click)="rate(4)"
+           [style.color]="rating >= 4 ? 'gold' : 'gray'"
+           style="font-size: 24px; cursor: pointer;">
+           ★
+        </i>
+        <i (click)="rate(5)"
+           [style.color]="rating >= 5 ? 'gold' : 'gray'"
+           style="font-size: 24px; cursor: pointer;">
+           ★
+        </i>
+      </div>
+    </div>
+  
+    <button type="button" (click)="onSubmit()">Post Review</button>
+  </div>
+  

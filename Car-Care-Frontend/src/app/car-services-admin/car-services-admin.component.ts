@@ -30,14 +30,12 @@ export class CarServicesAdminComponent {
   allCarServices: CarService[] = [];  // Keep all services to reset filter
   serviceTypes: string[] = []; // Array to hold service types
   selectedFile: File | null = null;
-  // addServiceForm: FormGroup;
   isAddServiceFormVisible = false;
   newService: any = { 
-    name: '', 
+    service_name: '', 
     description: '',
     serviceType:'',
     price:0,
-    image_url: '' 
     };
 
 
@@ -109,6 +107,7 @@ export class CarServicesAdminComponent {
     service.editMode = !service.editMode;
   }
 
+  //update service
   saveChanges(serviceid:number,service: any): void {
     const updatedService = {
       service_name: service.service_name,
@@ -132,7 +131,7 @@ export class CarServicesAdminComponent {
     });
   }
   //upload or update image    
-  onFileSelected(event: Event,carService:CarService): void {
+  UploadImage(event: Event,carServiceID:number): void {
     const input = event.target as HTMLInputElement;
     if (input?.files?.length) {
       this.selectedFile = input.files[0];
@@ -140,8 +139,9 @@ export class CarServicesAdminComponent {
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('file', this.selectedFile);
+      // console.log(carServiceID);
 
-      this.http.post(`http://localhost:8080/CarServices/upload/${carService.serviceid}`, formData)
+      this.http.post(`http://localhost:8080/CarServices/upload/${carServiceID}`, formData)
         .subscribe(
           response => {
             console.log('Upload successful', response);
@@ -173,25 +173,32 @@ export class CarServicesAdminComponent {
     }
   }
 
-  showAddServiceForm(): void {
-    this.isAddServiceFormVisible = true;
+  toggleAddServiceForm(): void {
+    this.isAddServiceFormVisible = !this.isAddServiceFormVisible;
+  }
+  cancelAddService(): void {
+    this.newService = { service_name: '', description: '',serviceType:'',price:0,image_url: '' }; // Reset the form
+    this.isAddServiceFormVisible = !this.isAddServiceFormVisible;
+
   }
 
-  addService(): void {
+
+  addService(event:Event): void {
+    const input = event.target as HTMLInputElement;
+
     this.http.post<any>('http://localhost:8080/CarServices', this.newService).subscribe(
       response => {
-        this.allCarServices.push(this.newService); // Add the new service to the list
-        this.newService = { name: '', 
-          description: '',
-          serviceType:'',
-          price:0,
-          image_url: ''  }; // Reset the form
-        console.log("Service added successfully");
+          this.allCarServices.push(this.newService); // Add the new service to the list
+          this.newService = { service_name: '', description: '',serviceType:'',price:0}; // Reset the form
+          console.log("Service added successfully"); 
+          // window.location.reload();
       },
       error => {
         console.error('Error adding service', error);
       }
     );
-  }
+    
+  this.toggleAddServiceForm();
+}
 
 }

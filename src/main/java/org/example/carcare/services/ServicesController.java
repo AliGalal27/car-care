@@ -39,11 +39,13 @@ public class ServicesController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addService(@RequestBody Services service) {
+    public ResponseEntity<Map<String, String>> addService(@RequestBody Services service) {
         servicesService.addNewService(service);
-        return ResponseEntity.ok("Service added successfully");
-
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Service added successfully");
+        return ResponseEntity.ok(response);
     }
+
 
     @DeleteMapping(path = "{serviceId}")
     public void deleteService(@PathVariable("serviceId") int Id) {
