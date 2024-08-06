@@ -79,8 +79,17 @@ public class BookingService {
         @Transactional
         public void cancelBooking( int bookingId){
             boolean bookingExists = bookingRepository.findById(bookingId).isPresent();
-            if (bookingExists)
+            if (bookingExists) {
+
+                Booking existingBooking = bookingRepository.findById(bookingId)
+                        .orElseThrow(() -> new IllegalArgumentException("Invalid Booking ID."));
+
+                ServicesSchedule oldSchedule= servicesScheduleRepository.findById(existingBooking.getServiceScheduleId())
+                        .orElseThrow(() -> new IllegalArgumentException("Invalid Service Schedule ID."));
+                oldSchedule.setServicesScheduleStatus(ServicesScheduleStatus.AVAILABLE);
+
                 bookingRepository.deleteById(bookingId);
+            }
         }
 
 
